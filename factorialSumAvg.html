@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        <h1>Computing the nth Factorial, Sum and Average</h1>
+        <p>
+            <label for="number">Number</label>
+            <input id="number" name="number" type="number">
+
+        </p>
+        <button onclick="computeFactorial()">Compute Factorial</button>
+        <h2 id="Factorial"></h2>
+        <button onclick="computeSum()">Compute Sum</button>
+        <h2 id="Sum"></h2>
+        <button onclick="computeAvg()">Compute Average</button>
+        <h2 id="Average"></h2>
+
+    </body>
+</html>
+<script>
+//using while loop
+function computeFactorial(){
+    var num, i, fact;
+    fact = 1;
+    i = 1;
+    num = document.getElementById("number").value*1;
+
+    while(i <= num){
+        fact = fact * i;
+        i++
+    }
+    document.getElementById("Factorial").innerHTML="The factorial of the number " + num + " is " + fact;
+}
+//using do while looop
+function computeSum(){
+    var num, i, sum;
+    sum = 0;
+    i = 0;
+    num = document.getElementById("number").value*1;
+
+    do{
+        sum = sum + i;
+        i++
+    }
+    while(i <= num);
+    document.getElementById("Sum").innerHTML="The sum of the first numbers of " + num + " is " + sum;
+}
+//using for loop
+function computeAvg(){
+    var num, sum, i, avg;
+    avg = 0;
+    i = 0;
+    sum = 0;
+    num = document.getElementById("number").value*1;
+    console.log(num);
+    if (num == 0){
+        avg = 0;
+        console.log(avg);
+    }
+    else{
+        for (i = 0; i <=num; i++){
+            sum = sum + i;
+        }
+        avg = sum / num;
+    }
+    document.getElementById("Average").innerHTML="The average of the first numbers of " + num + " is " + avg;
+}
+</script>

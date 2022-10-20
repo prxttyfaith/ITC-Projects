@@ -1,0 +1,55 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Income Tax Calculator</title>
+    </head>
+
+    <body>
+        <h1>Income Tax Calculator</h1>
+
+        <p>
+            <label for="taxableIncome">Taxable Income</label>
+            <input id="taxableIncome" name="taxableIncome" type="number">
+
+            <button onclick="computeTax()">Compute Income Tax </button>
+        </p>
+
+        <h2 id="incomeTax"></h2><br>
+
+        <p>
+            <a href="index.html">Back to Home Page</a>
+        </p>
+
+        <script>
+            function computeTax(){
+                var income;
+                var tax;
+                income = document.getElementById("taxableIncome").value*1;
+                console.log(income);
+
+                if (income <= 250000){
+                    tax = Math.round(0*100)/100;
+                }
+                else if(income >= 250001 && income <= 400000){
+                    tax = Math.round(((income - 250000)*.20)*100)/100;
+                }
+                else if(income >= 400001 && income <= 800000){
+                    tax = Math.round(((income - 400000)*.25 + 30000)*100)/100;
+                }
+                else if(income >= 800001 && income <= 2000000){
+                    tax = Math.round(((income - 800000)*.30 + 130000)*100)/100;
+                }
+                else if(income >= 2000001 && income <= 8000000){
+                    tax = Math.round(((income - 2000000)*.32 + 490000)*100)/100;
+                }
+                else{
+                    tax = Math.round(((income - 8000000)*.35 + 2410000)*100)/100;
+                }
+
+
+                document.getElementById("incomeTax").innerHTML= " The income tax for ₱" + income + " is ₱" + tax;
+            }
+        </script>
+
+    </body>
+</html>

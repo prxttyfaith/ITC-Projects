@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+<title>Conversion</title>
+
+<h2>Length Conversion: Meters to Feet & feet to Meters</h2>
+<p>Please enter a number in one of the areas below:</p>
+<p>
+  <label for="meters">Meters</label>
+  <input id="meters" onkeyup="convertLength('m')">
+</p>
+
+<p>
+  <label for="feet">Feet</label>
+  <input id="feet" onkeyup="convertLength('ft')">
+</p>
+
+<h2>Temperature Conversion: Celsius to Fahrenheit & Fahrenheit to Celsius</h2>
+<p>Please enter a number in one of the areas below:</p>
+
+<p>
+    <label for="celsius">Degree Celsius</label>
+    <input id="celsius" onkeyup="convert('C')">
+</p>
+
+<p>
+    <label for="fahrenheit">Degree Fahrenheit</label>
+    <input id="fahrenheit" onkeyup="convert('F')">
+</p>
+
+<p>
+    <a href="index.html">Back to Home Page</a>
+</p>
+
+<script>
+function convertLength(unit) {
+    var x;
+    //compute meters - feet
+    if (unit == "m") {
+    x = document.getElementById("meters").value * 3.28084;
+    document.getElementById("feet").value = Math.round(x*100)/100;
+    }
+    //compute ft - meters
+    else {
+    x = document.getElementById("feet").value / 3.2808;
+    document.getElementById("meters").value = Math.round(x*100)/100;
+     }
+}
+function convert(degree) {
+  var x;
+  if (degree == "C") {
+    x = document.getElementById("celsius").value * 9 / 5 + 32;
+    document.getElementById("fahrenheit").value = Math.round(x*100)/100;
+  } else {
+    x = (document.getElementById("fahrenheit").value -32) * 5 / 9;
+    document.getElementById("celsius").value = Math.round(x*100)/100;
+  }
+}
+</script>
+
+</body>
+</html>

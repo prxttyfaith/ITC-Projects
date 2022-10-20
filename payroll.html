@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Payroll</title>
+        <style>
+        #payroll {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #payroll td, #payroll th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #payroll tr:nth-child(even){background-color: #ebb6ae;}
+        #payroll tr:nth-child(odd){background-color: #f5e2df;}
+
+        #payroll th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #6d96bf;
+          color: white;
+        }
+    </style>
+    </head>
+    <body onload="initPayroll()">
+        <h1>Simple Payroll</h1>
+        <p>
+            <a href="index.html">Back to Home Page</a>
+        </p>
+        <p>
+            <label for="name">Employee Name</label>
+            <input type="text" name="name" id="name"></input>
+            <label for="daysWorked">Days Worked</label>
+            <input type="number" name="daysWorked" id="daysWorked"></input><br>
+            <label for="dailyRate">Daily Rate</label>
+            <input type="number" name="dailyRate" id="dailyRate"></input>
+            <label for="deductionAmount">Deduction Amount</label>
+            <input type="number" name="deductionAmount" id="deductionAmount"></input>
+            <button onclick="addToList()">Add to Payroll List</button>
+        </p>
+        <p>
+            <label for="payrollNum">Payroll List</label>
+            <input type="number" name="payrollNum" id="payrollNum"></input>
+            <button onclick="clearList()"> Clear</button>
+            <label for="delEmployee">Delete Employee no.</label>
+            <input type="number" name="delEmployee" id="delEmployee">
+            <button onclick="deleteEmployee()"> Delete</button>
+        </p>
+
+        <p id = "payroll"></p>
+
+        <script>
+            //initialize payroll List
+            function initPayroll(){
+                payroll=[];
+                document.getElementById("payrollNum").value = payroll.length;
+                document.getElementById("payroll").innerHTML = "";
+            }
+            // Add employee to List
+            function addToList(){
+                var payroList = {
+                    "name": " ",
+                    "daysWorked": "0",
+                    "dailyRate": "0",
+                    "deductionAmount": "0",
+                    "grossPay": function grossPay(){
+                        return Math.round(this.daysWorked*this.dailyRate*100)/100;
+                    },
+                    "netPay": function netPay(){
+                        return Math.round(this.grossPay()-this.deductionAmount*100)/100;
+                    }
+                };
+
+                payroList.name=document.getElementById("name").value;
+                payroList.daysWorked=document.getElementById("daysWorked").value;
+                payroList.dailyRate=document.getElementById("dailyRate").value;
+                payroList.deductionAmount=document.getElementById("deductionAmount").value;
+
+                console.log(payroList.name);
+                console.log(payroList.daysWorked);
+                console.log(payroList.dailyRate);
+                console.log(payroList.deductionAmount);
+
+                payroll.push(payroList);
+                console.log(payroll.length);
+                document.getElementById("payrollNum").value=payroll.length;
+
+                showList();
+            }
+
+            //display list contents
+            function showList(){
+                var i,length, payrollText, ln;
+                var theader, tbody, tfooter;
+
+                //table header
+                theader = "<thead>";
+                    theader+="<tr>";
+                        theader+="<th>No.</th>";
+                        theader+='<th style="text-align:left" >Employee Name</th>';
+                        theader+="<th>Days Worked</th>";
+                        theader+='<th style="text-align:right">Daily Rate</th>';
+                        theader+="<th>Deduction Amount</th>";
+                        theader+="<th>Gross Pay</th>";
+                        theader+="<th>Net Pay</th>";
+                    theader+="</tr>";
+                theader+="</thead>";
+
+                //table body
+                length = payroll.length;
+                for(i = 0, tbody=''; i<length ;  i++){
+                    ln = i + 1;
+                    tbody += "<tr>"
+                        + '<td>' + ln +'</td>'
+                        + '<td>' + payroll[i].name +'</td>'
+                        + '<td>' + payroll[i].daysWorked +'</td>'
+                        + '<td>' + payroll[i].dailyRate +'</td>'
+                        + '<td>' + payroll[i].deductionAmount +'</td>'
+                        + '<td>' + payroll[i].grossPay()+'</td>'
+                        + '<td>' + payroll[i].netPay()+'</td>'
+                        + "</tr>";
+
+                }
+                document.getElementById("payroll").innerHTML =
+                "<table>" + theader + tbody +"</table>"
+            }
+
+            //clearList
+            function clearList(){
+                var clear;
+                clear = confirm("Are you sure you want to delete all employee(s) from the payroll list?");
+
+                if (clear){
+                    initPayroll();
+                }
+            }
+
+            //delete employee from List
+            function deleteEmployee(){
+                var delEmployee, listNum;
+                listNum = document.getElementById("delEmployee").value;
+                delEmployee = confirm("Are you sure you want to delete employee no. " + listNum + " from the payroll list?");
+
+                if(delEmployee){
+                    payroll.splice(listNum-1,1);
+                    document.getElementById("payrollNum").value = payroll.length;
+                    showList();
+                }
+            }
+
+            var payroll = [];
+        </script>
+    </body>
+</html>
