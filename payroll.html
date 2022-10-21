@@ -71,7 +71,7 @@
                         return Math.round(this.daysWorked*this.dailyRate*100)/100;
                     },
                     "netPay": function netPay(){
-                        return Math.round(this.grossPay()-this.deductionAmount*100)/100;
+                        return Math.round((this.grossPay()-this.deductionAmount)*100)/100;
                     }
                 };
 
@@ -84,6 +84,9 @@
                 console.log(payroList.daysWorked);
                 console.log(payroList.dailyRate);
                 console.log(payroList.deductionAmount);
+                console.log(payroList.grossPay);
+                console.log(payroList.netPay);
+
 
                 payroll.push(payroList);
                 console.log(payroll.length);
@@ -101,11 +104,11 @@
                 theader = "<thead>";
                     theader+="<tr>";
                         theader+="<th>No.</th>";
-                        theader+='<th style="text-align:left" >Employee Name</th>';
+                        theader+='<th>Employee Name</th>';
                         theader+="<th>Days Worked</th>";
-                        theader+='<th style="text-align:right">Daily Rate</th>';
-                        theader+="<th>Deduction Amount</th>";
+                        theader+='<th>Daily Rate</th>';
                         theader+="<th>Gross Pay</th>";
+                        theader+="<th>Deduction Amount</th>";
                         theader+="<th>Net Pay</th>";
                     theader+="</tr>";
                 theader+="</thead>";
@@ -119,8 +122,8 @@
                         + '<td>' + payroll[i].name +'</td>'
                         + '<td>' + payroll[i].daysWorked +'</td>'
                         + '<td>' + payroll[i].dailyRate +'</td>'
-                        + '<td>' + payroll[i].deductionAmount +'</td>'
                         + '<td>' + payroll[i].grossPay()+'</td>'
+                        + '<td>' + payroll[i].deductionAmount +'</td>'
                         + '<td>' + payroll[i].netPay()+'</td>'
                         + "</tr>";
 
